@@ -1,2 +1,3 @@
-# contentful_api
-Simple Contentful Python API client
+# Contentful API
+
+Simple Contentful Python API client.
