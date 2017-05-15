@@ -1,0 +1,8 @@
+*.pyc
+*.debug
+
+session.shelve*
+
+/dist
+/build
+/src/contentful_api_python.egg-info
