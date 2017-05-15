@@ -63,13 +63,15 @@ class ContentfulApp(appier.WebApp):
         return user
 
     def ensure_api(self):
-        access_token = self.session.get("contentful.access_token", None)
+        access_token = appier.conf("CONTENTFUL_TOKEN", None)
+        access_token = self.session.get("contentful.access_token", access_token)
         if access_token: return
         api = base.get_api()
         return api.oauth_authorize()
 
     def get_api(self):
-        access_token = self.session and self.session.get("contentful.access_token", None)
+        access_token = appier.conf("CONTENTFUL_TOKEN", None)
+        access_token = self.session and self.session.get("contentful.access_token", access_token)
         api = base.get_api()
         api.access_token = access_token
         return api
