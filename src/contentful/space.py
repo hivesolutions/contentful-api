@@ -39,7 +39,8 @@ __license__ = "Apache License, Version 2.0"
 
 class SpaceApi(object):
 
-    def get_space(self, id):
+    def get_space(self, id = None):
+        id = id or self.space
         url = self.base_url + "spaces/%s" % id
         contents = self.get(url)
         return contents

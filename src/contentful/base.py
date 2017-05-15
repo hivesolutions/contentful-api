@@ -53,11 +53,13 @@ class Api(
 ):
 
     def __init__(self, *args, **kwargs):
-        appier.Api.__init__(self, *args, **kwargs)
+        appier.OAuth2Api.__init__(self, *args, **kwargs)
         self.client_id = appier.conf("CONTENTFUL_ID", None)
         self.client_secret = appier.conf("CONTENTFUL_SECRET", None)
         self.access_token = appier.conf("CONTENTFUL_TOKEN", None)
+        self.space = appier.conf("CONTENTFUL_SPACE", "default")
         self.base_url = kwargs.get("base_url", BASE_URL)
         self.client_id = kwargs.get("client_id", self.client_id)
         self.client_secret = kwargs.get("client_secret", self.client_secret)
         self.access_token = kwargs.get("access_token", self.access_token)
+        self.space = kwargs.get("space", self.space)
