@@ -19,6 +19,9 @@
 # You should have received a copy of the Apache License along with
 # Hive Contentful API. If not, see <http://www.apache.org/licenses/>.
 
+__author__ = "João Magalhães <joamag@hive.pt>"
+""" The author(s) of the module """
+
 __version__ = "1.0.0"
 """ The version of the module """
 
@@ -34,10 +37,45 @@ __copyright__ = "Copyright (c) 2008-2017 Hive Solutions Lda."
 __license__ = "Apache License, Version 2.0"
 """ The license for the module """
 
-from . import base
-from . import entry
-from . import space
+import appier
 
-from .base import BASE_URL, Api
-from .entry import EntryApi
-from .space import SpaceApi
+from . import base
+
+class ContentfulApp(appier.WebApp):
+
+    def __init__(self, *args, **kwargs):
+        appier.WebApp.__init__(
+            self,
+            name = "contentful",
+            *args, **kwargs
+        )
+
+    @appier.route("/", "GET")
+    def index(self):
+        return self.entries()
+
+    @appier.route("/entries", "GET")
+    def entries(self):
+        url = self.ensure_api()
+        if url: return self.redirect(url)
+        api = self.get_api()
+        user = api.self_user()
+        return user
+
+    def ensure_api(self):
+        access_token = self.session.get("contentful.access_token", None)
+        if access_token: return
+        api = base.get_api()
+        return api.oauth_authorize()
+
+    def get_api(self):
+        access_token = self.session and self.session.get("contentful.access_token", None)
+        api = base.get_api()
+        api.access_token = access_token
+        return api
+
+if __name__ == "__main__":
+    app = ContentfulApp()
+    app.serve()
+else:
+    __path__ = []

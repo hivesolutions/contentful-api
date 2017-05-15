@@ -39,11 +39,18 @@ __license__ = "Apache License, Version 2.0"
 
 import appier
 
+from . import entry
+from . import space
+
 BASE_URL = "https://cdn.contentful.com/"
 """ The default base url to be used when no other
 base url value is provided to the constructor """
 
-class Api(appier.OAuth2Api):
+class Api(
+    appier.OAuth2Api,
+    entry.EntryApi,
+    space.SpaceApi
+):
 
     def __init__(self, *args, **kwargs):
         appier.Api.__init__(self, *args, **kwargs)
