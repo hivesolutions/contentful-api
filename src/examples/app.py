@@ -118,6 +118,13 @@ class ContentfulApp(appier.WebApp):
             self.url_for("contentful.index")
         )
 
+    @appier.exception_handler(appier.OAuthAccessError)
+    def oauth_error(self, error):
+        if "ct.access_token" in self.session: del self.session["ct.access_token"]
+        return self.redirect(
+            self.url_for("contentful.index")
+        )
+
     def ensure_api(self):
         access_token = appier.conf("CONTENTFUL_TOKEN", None)
         access_token = self.session.get("ct.access_token", access_token)
