@@ -60,8 +60,17 @@ class ContentfulApp(appier.WebApp):
         url = self.ensure_api()
         if url: return self.redirect(url)
         api = self.get_api()
-        user = api.list_entries(space = space)
-        return user
+        entries = api.list_entries(space = space)
+        return entries
+
+    @appier.route("/entries/<str:id>", "GET")
+    def entry(self, id):
+        space = self.field("space")
+        url = self.ensure_api()
+        if url: return self.redirect(url)
+        api = self.get_api()
+        entry = api.get_entry(id, space = space)
+        return entry
 
     @appier.route("/content_types", "GET")
     def content_types(self):
@@ -69,8 +78,8 @@ class ContentfulApp(appier.WebApp):
         url = self.ensure_api()
         if url: return self.redirect(url)
         api = self.get_api()
-        user = api.list_content_types(space = space)
-        return user
+        content_types = api.list_content_types(space = space)
+        return content_types
 
     def ensure_api(self):
         access_token = appier.conf("CONTENTFUL_TOKEN", None)
