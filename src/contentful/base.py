@@ -48,6 +48,16 @@ BASE_URL = "https://cdn.contentful.com/"
 """ The default base url to be used when no other
 base url value is provided to the constructor """
 
+LOGIN_URL = "https://be.contentful.com/"
+""" The base url that is going to be used for the login
+associated end points (interactive) """
+
+SCOPE = (
+    "content_management_manage",
+)
+""" The list of permissions to be used to create the
+scope string for the oauth value """
+
 class Api(
     appier.OAuth2Api,
     asset.AssetApi,
@@ -61,9 +71,44 @@ class Api(
         self.client_id = appier.conf("CONTENTFUL_ID", None)
         self.client_secret = appier.conf("CONTENTFUL_SECRET", None)
         self.access_token = appier.conf("CONTENTFUL_TOKEN", None)
+        self.redirect_url = appier.conf("CONTENTFUL_REDIRECT_URL", None)
         self.space = appier.conf("CONTENTFUL_SPACE", "default")
         self.base_url = kwargs.get("base_url", BASE_URL)
+        self.login_url = kwargs.get("login_url", LOGIN_URL)
         self.client_id = kwargs.get("client_id", self.client_id)
         self.client_secret = kwargs.get("client_secret", self.client_secret)
+        self.redirect_url = kwargs.get("redirect_url", self.redirect_url)
         self.access_token = kwargs.get("access_token", self.access_token)
+        self.scope = kwargs.get("scope", SCOPE)
         self.space = kwargs.get("space", self.space)
+
+    def oauth_authorize(self, state = None):
+        url = self.login_url + "oauth/authorize"
+        values = dict(
+            client_id = self.client_id,
+            redirect_uri = self.redirect_url,
+            response_type = "code",
+            scope = " ".join(self.scope)
+        )
+        if state: values["state"] = state
+        data = appier.legacy.urlencode(values)
+        url = url + "?" + data
+        return url
+
+    def oauth_access(self, code):
+        url = self.base_url + "oauth/access_token"
+        contents = self.post(
+            url,
+            auth = False,
+            token = False,
+            client_id = self.client_id,
+            client_secret = self.client_secret,
+            grant_type = "authorization_code",
+            redirect_uri = self.redirect_url,
+            code = code
+        )
+        contents = contents.decode("utf-8")
+        contents = appier.legacy.parse_qs(contents)
+        self.access_token = contents["access_token"][0]
+        self.trigger("access_token", self.access_token)
+        return self.access_token
