@@ -99,7 +99,6 @@ class Api(
         url = self.base_url + "oauth/access_token"
         contents = self.post(
             url,
-            auth = False,
             token = False,
             client_id = self.client_id,
             client_secret = self.client_secret,
