@@ -81,6 +81,15 @@ class ContentfulApp(appier.WebApp):
         content_types = api.list_content_types(space = space)
         return content_types
 
+    @appier.route("/content_types/<str:id>", "GET")
+    def content_type(self, id):
+        space = self.field("space")
+        url = self.ensure_api()
+        if url: return self.redirect(url)
+        api = self.get_api()
+        content_type = api.get_content_type(id, space = space)
+        return content_type
+
     def ensure_api(self):
         access_token = appier.conf("CONTENTFUL_TOKEN", None)
         access_token = self.session.get("contentful.access_token", access_token)
