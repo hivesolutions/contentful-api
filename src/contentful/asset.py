@@ -37,33 +37,16 @@ __copyright__ = "Copyright (c) 2008-2017 Hive Solutions Lda."
 __license__ = "Apache License, Version 2.0"
 """ The license for the module """
 
-import appier
+class AssetApi(object):
 
-from . import asset
-from . import entry
-from . import space
-from . import content_type
+    def list_assets(self, space = None):
+        space = space or self.space
+        url = self.base_url + "spaces/%s/assets" % space
+        contents = self.get(url)
+        return contents
 
-BASE_URL = "https://cdn.contentful.com/"
-""" The default base url to be used when no other
-base url value is provided to the constructor """
-
-class Api(
-    appier.OAuth2Api,
-    asset.AssetApi,
-    entry.EntryApi,
-    space.SpaceApi,
-    content_type.ContentTypeApi
-):
-
-    def __init__(self, *args, **kwargs):
-        appier.OAuth2Api.__init__(self, *args, **kwargs)
-        self.client_id = appier.conf("CONTENTFUL_ID", None)
-        self.client_secret = appier.conf("CONTENTFUL_SECRET", None)
-        self.access_token = appier.conf("CONTENTFUL_TOKEN", None)
-        self.space = appier.conf("CONTENTFUL_SPACE", "default")
-        self.base_url = kwargs.get("base_url", BASE_URL)
-        self.client_id = kwargs.get("client_id", self.client_id)
-        self.client_secret = kwargs.get("client_secret", self.client_secret)
-        self.access_token = kwargs.get("access_token", self.access_token)
-        self.space = kwargs.get("space", self.space)
+    def get_asset(self, id, space = None):
+        space = space or self.space
+        url = self.base_url + "spaces/%s/assets/%s" % (space, id)
+        contents = self.get(url)
+        return contents

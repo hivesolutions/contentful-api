@@ -90,6 +90,24 @@ class ContentfulApp(appier.WebApp):
         content_type = api.get_content_type(id, space = space)
         return content_type
 
+    @appier.route("/assets", "GET")
+    def assets(self):
+        space = self.field("space")
+        url = self.ensure_api()
+        if url: return self.redirect(url)
+        api = self.get_api()
+        assets = api.list_assets(space = space)
+        return assets
+
+    @appier.route("/assets/<str:id>", "GET")
+    def asset(self, id):
+        space = self.field("space")
+        url = self.ensure_api()
+        if url: return self.redirect(url)
+        api = self.get_api()
+        asset = api.get_asset(id, space = space)
+        return asset
+
     def ensure_api(self):
         access_token = appier.conf("CONTENTFUL_TOKEN", None)
         access_token = self.session.get("contentful.access_token", access_token)

@@ -34,10 +34,14 @@ __copyright__ = "Copyright (c) 2008-2017 Hive Solutions Lda."
 __license__ = "Apache License, Version 2.0"
 """ The license for the module """
 
+from . import asset
 from . import base
+from . import content_type
 from . import entry
 from . import space
 
+from .asset import AssetApi
 from .base import BASE_URL, Api
+from .content_type import ContentTypeApi
 from .entry import EntryApi
 from .space import SpaceApi
