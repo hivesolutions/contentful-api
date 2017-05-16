@@ -44,3 +44,9 @@ class EntryApi(object):
         url = self.base_url + "spaces/%s/entries" % space
         contents = self.get(url)
         return contents
+
+    def get_entry(self, id, space = None):
+        space = space or self.space
+        url = self.base_url + "spaces/%s/entries/%s" % (space, id)
+        contents = self.get(url)
+        return contents

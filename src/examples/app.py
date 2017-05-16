@@ -52,7 +52,7 @@ class ContentfulApp(appier.WebApp):
 
     @appier.route("/", "GET")
     def index(self):
-        return self.entries("default")
+        return self.entries()
 
     @appier.route("/entries", "GET")
     def entries(self):
@@ -61,6 +61,15 @@ class ContentfulApp(appier.WebApp):
         if url: return self.redirect(url)
         api = self.get_api()
         user = api.list_entries(space = space)
+        return user
+
+    @appier.route("/content_types", "GET")
+    def content_types(self):
+        space = self.field("space")
+        url = self.ensure_api()
+        if url: return self.redirect(url)
+        api = self.get_api()
+        user = api.list_content_types(space = space)
         return user
 
     def ensure_api(self):
