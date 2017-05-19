@@ -39,10 +39,10 @@ __license__ = "Apache License, Version 2.0"
 
 class EntryApi(object):
 
-    def list_entries(self, space = None):
+    def list_entries(self, space = None, *args, **kwargs):
         space = space or self.space
         url = self.base_url + "spaces/%s/entries" % space
-        contents = self.get(url)
+        contents = self.get(url, **kwargs)
         return contents
 
     def get_entry(self, id, space = None):

@@ -39,10 +39,10 @@ __license__ = "Apache License, Version 2.0"
 
 class AssetApi(object):
 
-    def list_assets(self, space = None):
+    def list_assets(self, space = None, *args, **kwargs):
         space = space or self.space
         url = self.base_url + "spaces/%s/assets" % space
-        contents = self.get(url)
+        contents = self.get(url, **kwargs)
         return contents
 
     def get_asset(self, id, space = None):
