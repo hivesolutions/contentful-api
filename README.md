@@ -2,6 +2,12 @@
 
 Simple Contentful Python API client.
 
+## Configuration
+
+* `CONTENTFUL_ID` (`str`) - The Contentful identifier to make API requests (defaults to `None`)
+* `CONTENTFUL_SECRET` (`str`) - The secret key to be used to authenticate API requests (defaults to `None`)
+* `CONTENTFUL_TOKEN` (`str`) - The access token to be used for non OAuth space authentiation (defaults to `None`)
+
 ## License
 
 Contentful API is currently licensed under the [Apache License, Version 2.0](http://www.apache.org/licenses/).
