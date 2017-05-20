@@ -8,7 +8,7 @@ Simple Contentful Python API client.
 * `CONTENTFUL_SECRET` (`str`) - The secret key to be used to authenticate API requests (defaults to `None`)
 * `CONTENTFUL_TOKEN` (`str`) - The access token to be used for non OAuth space authentication (defaults to `None`)
 * `CONTENTFUL_REDIRECT_URL` (`str`) - The URL to be used for the OAuth redirection process (defaults to `None`)
-* `CONTENTFUL_SPACE` (`str`) - The name of the space to be used by default (default to `None`)
+* `CONTENTFUL_SPACE` (`str`) - The identifier of the space to be used by default (default to `None`)
 
 ## License
 
