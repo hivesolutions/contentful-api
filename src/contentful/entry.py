@@ -37,7 +37,7 @@ __copyright__ = "Copyright (c) 2008-2017 Hive Solutions Lda."
 __license__ = "Apache License, Version 2.0"
 """ The license for the module """
 
-class EntryApi(object):
+class EntryAPI(object):
 
     def list_entries(self, space = None, *args, **kwargs):
         space = space or self.space

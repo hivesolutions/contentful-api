@@ -40,8 +40,8 @@ from . import content_type
 from . import entry
 from . import space
 
-from .asset import AssetApi
-from .base import BASE_URL, Api
-from .content_type import ContentTypeApi
-from .entry import EntryApi
-from .space import SpaceApi
+from .asset import AssetAPI
+from .base import BASE_URL, API
+from .content_type import ContentTypeAPI
+from .entry import EntryAPI
+from .space import SpaceAPI

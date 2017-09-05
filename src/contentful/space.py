@@ -37,7 +37,7 @@ __copyright__ = "Copyright (c) 2008-2017 Hive Solutions Lda."
 __license__ = "Apache License, Version 2.0"
 """ The license for the module """
 
-class SpaceApi(object):
+class SpaceAPI(object):
 
     def get_space(self, id = None):
         id = id or self.space

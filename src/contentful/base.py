@@ -58,16 +58,16 @@ SCOPE = (
 """ The list of permissions to be used to create the
 scope string for the oauth value """
 
-class Api(
-    appier.OAuth2Api,
-    asset.AssetApi,
-    entry.EntryApi,
-    space.SpaceApi,
-    content_type.ContentTypeApi
+class API(
+    appier.OAuth2API,
+    asset.AssetAPI,
+    entry.EntryAPI,
+    space.SpaceAPI,
+    content_type.ContentTypeAPI
 ):
 
     def __init__(self, *args, **kwargs):
-        appier.OAuth2Api.__init__(self, *args, **kwargs)
+        appier.OAuth2API.__init__(self, *args, **kwargs)
         self.client_id = appier.conf("CONTENTFUL_ID", None)
         self.client_secret = appier.conf("CONTENTFUL_SECRET", None)
         self.access_token = appier.conf("CONTENTFUL_TOKEN", None)
