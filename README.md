@@ -1,6 +1,6 @@
 # [Contentful API](http://contentful-api.hive.pt)
 
-Simple Contentful Python API client.
+Simple [Contentful](http://contentful.com) Python API client.
 
 ## Configuration
 
