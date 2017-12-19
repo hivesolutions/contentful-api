@@ -45,11 +45,11 @@ from . import space
 from . import content_type
 
 BASE_URL = "https://cdn.contentful.com/"
-""" The default base url to be used when no other
-base url value is provided to the constructor """
+""" The default base URL to be used when no other
+base URL value is provided to the constructor """
 
 LOGIN_URL = "https://be.contentful.com/"
-""" The base url that is going to be used for the login
+""" The base URL that is going to be used for the login
 associated end points (interactive) """
 
 SCOPE = (
