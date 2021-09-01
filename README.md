@@ -18,7 +18,7 @@ Contentful API is currently licensed under the [Apache License, Version 2.0](htt
 
 ## Build Automation
 
-[![Build Status](https://travis-ci.com/hivesolutions/contentful_api.svg?branch=master)](https://travis-ci.com/hivesolutions/contentful_api)
+[![Build Status](https://app.travis-ci.com/hivesolutions/contentful_api.svg?branch=master)](https://travis-ci.com/github/hivesolutions/contentful_api)
 [![Coverage Status](https://coveralls.io/repos/hivesolutions/contentful_api/badge.svg?branch=master)](https://coveralls.io/r/hivesolutions/contentful_api?branch=master)
 [![PyPi Status](https://img.shields.io/pypi/v/contentful_api.svg)](https://pypi.python.org/pypi/contentful_api)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](https://www.apache.org/licenses/)
