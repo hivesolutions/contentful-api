@@ -5,4 +5,4 @@ session.shelve*
 
 /dist
 /build
-/src/contentful-api.egg-info
+/src/contentful_api.egg-info
