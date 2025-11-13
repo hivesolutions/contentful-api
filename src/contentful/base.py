@@ -43,18 +43,17 @@ LOGIN_URL = "https://be.contentful.com/"
 """ The base URL that is going to be used for the login
 associated end points (interactive) """
 
-SCOPE = (
-    "content_management_manage",
-)
+SCOPE = ("content_management_manage",)
 """ The list of permissions to be used to create the
 scope string for the OAuth value """
+
 
 class API(
     appier.OAuth2API,
     asset.AssetAPI,
     entry.EntryAPI,
     space.SpaceAPI,
-    content_type.ContentTypeAPI
+    content_type.ContentTypeAPI,
 ):
 
     def __init__(self, *args, **kwargs):
@@ -73,15 +72,16 @@ class API(
         self.scope = kwargs.get("scope", SCOPE)
         self.space = kwargs.get("space", self.space)
 
-    def oauth_authorize(self, state = None):
+    def oauth_authorize(self, state=None):
         url = self.login_url + "oauth/authorize"
         values = dict(
-            client_id = self.client_id,
-            redirect_uri = self.redirect_url,
-            response_type = "code",
-            scope = " ".join(self.scope)
+            client_id=self.client_id,
+            redirect_uri=self.redirect_url,
+            response_type="code",
+            scope=" ".join(self.scope),
         )
-        if state: values["state"] = state
+        if state:
+            values["state"] = state
         data = appier.legacy.urlencode(values)
         url = url + "?" + data
         return url
@@ -90,12 +90,12 @@ class API(
         url = self.base_url + "oauth/access_token"
         contents = self.post(
             url,
-            token = False,
-            client_id = self.client_id,
-            client_secret = self.client_secret,
-            grant_type = "authorization_code",
-            redirect_uri = self.redirect_url,
-            code = code
+            token=False,
+            client_id=self.client_id,
+            client_secret=self.client_secret,
+            grant_type="authorization_code",
+            redirect_uri=self.redirect_url,
+            code=code,
         )
         contents = contents.decode("utf-8")
         contents = appier.legacy.parse_qs(contents)

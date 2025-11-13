@@ -32,9 +32,10 @@ import appier
 
 import contentful
 
+
 def get_api():
     return contentful.API(
-        client_id = appier.conf("CONTENTFUL_ID"),
-        client_secret = appier.conf("CONTENTFUL_SECRET"),
-        access_token = appier.conf("CONTENTFUL_TOKEN")
+        client_id=appier.conf("CONTENTFUL_ID"),
+        client_secret=appier.conf("CONTENTFUL_SECRET"),
+        access_token=appier.conf("CONTENTFUL_TOKEN"),
     )

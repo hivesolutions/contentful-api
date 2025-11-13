@@ -28,15 +28,16 @@ __copyright__ = "Copyright (c) 2008-2025 Hive Solutions Lda."
 __license__ = "Apache License, Version 2.0"
 """ The license for the module """
 
+
 class EntryAPI(object):
 
-    def list_entries(self, space = None, *args, **kwargs):
+    def list_entries(self, space=None, *args, **kwargs):
         space = space or self.space
         url = self.base_url + "spaces/%s/entries" % space
         contents = self.get(url, **kwargs)
         return contents
 
-    def get_entry(self, id, space = None):
+    def get_entry(self, id, space=None):
         space = space or self.space
         url = self.base_url + "spaces/%s/entries/%s" % (space, id)
         contents = self.get(url)

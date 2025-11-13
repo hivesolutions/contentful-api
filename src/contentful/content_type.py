@@ -28,15 +28,16 @@ __copyright__ = "Copyright (c) 2008-2025 Hive Solutions Lda."
 __license__ = "Apache License, Version 2.0"
 """ The license for the module """
 
+
 class ContentTypeAPI(object):
 
-    def list_content_types(self, space = None, *args, **kwargs):
+    def list_content_types(self, space=None, *args, **kwargs):
         space = space or self.space
         url = self.base_url + "spaces/%s/content_types" % space
         contents = self.get(url, **kwargs)
         return contents
 
-    def get_content_type(self, id, space = None):
+    def get_content_type(self, id, space=None):
         space = space or self.space
         url = self.base_url + "spaces/%s/content_types/%s" % (space, id)
         contents = self.get(url)
