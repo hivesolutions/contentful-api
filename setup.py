@@ -42,6 +42,7 @@ setuptools.setup(
     url="http://contentful-api.hive.pt",
     zip_safe=False,
     packages=["contentful"],
+    test_suite="contentful.test",
     package_dir={"": os.path.normpath("src")},
     install_requires=["appier"],
     classifiers=[
